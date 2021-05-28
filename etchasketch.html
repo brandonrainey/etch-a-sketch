@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+        
+            #gridContainer {
+                display: grid;
+                max-height: 400px;
+                min-height: 400px;
+                max-width: 400px;
+                min-width: 400px;
+            }
+
+            .filled {
+                background-color: black;
+            }
+            
+
+
+
+        </style>
+    </head>
+    <body>
+        <div id='gridContainer'>
+            
+        </div>
+        <button type='button' id='reset'>Reset</button>
+    </body>
+    <script>
+        
+        
+
+        
+        let x = 1;
+        let y = 1;
+        let divs = [];
+
+       
+
+        
+        const btn = document.querySelector('#reset');
+        btn.addEventListener('click', function(){createGrid()});
+    
+        
+
+
+        function createGrid() {
+            document.querySelectorAll('.box').forEach(e => e.remove());
+            document.querySelectorAll('.filled').forEach(e => e.remove());
+
+            squares = prompt('How many squares per side?');
+            if (squares > 100) {
+                squares = prompt('Please enter a lower number.');
+            }
+
+            gridContainer.style.gridTemplateColumns = `repeat(${squares}, auto)`;
+            gridContainer.style.gridTemplateRows = `repeat(${squares}, auto)`;
+
+            
+            
+            squares = squares * squares;
+            
+            for (i = 0; i < squares; i++) {
+                
+                divs[i] = document.createElement('div');
+                divs[i].id = 'div' + i;
+                divs[i].style.height = 'auto';
+                divs[i].style.width = 'auto';
+                divs[i].classList = 'box';
+
+                divs[i].addEventListener('mouseover', function(e) {
+                e.target.classList = 'filled';
+                }); 
+                
+                
+                gridContainer.appendChild(divs[i]);
+
+                if ( i < squares) {
+                    divs[i].gridColumn = x / y;
+                    y++;
+                } else {
+                    y = 1;
+                    x++;
+                    return;
+                }
+                
+                
+
+            }
+        }
+
+
+
+
+    </script>
+</html>
